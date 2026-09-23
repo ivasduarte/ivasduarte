@@ -5,7 +5,7 @@
 
 <!-- Header & Typing Effect -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=transparent&height=50&section=header&text=Software%20Engineering%20Student%20%7C%20Cybersecurity+Enthusiast&fontSize=20&fontColor=bcdae5&fontAlignY=30"/>
+  <img src="https://capsule-render.vercel.app/api?type=transparent&height=50&section=header&text=Software%20Engineering%20Student%20&fontSize=20&fontColor=bcdae5&fontAlignY=30"/>
 </p>
 
 <!-- Social / Contact -->
@@ -48,3 +48,23 @@
 <p align="center">
   <img src="https://skillicons.dev/icons?i=java,c,linux,git,github,maven,vscode,idea"/>
 </p>
+
+---
+<!-- Projects -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=transparent&height=60&section=header&text=%20Featured%20Academic%20Projects&fontSize=25&fontColor=bcdae5&fontAlignY=60&animation=fadeIn"/>
+</p>
+
+*(Note: Source code is private due to academic integrity policies. Links below point to architectural documentation and technical summaries).*
+
+* **[Eigenfaces Image Recognition](https://github.com/ivasduarte/eigenfaces.git)**  
+  Image compression and facial recognition tool. Used Linear Algebra concepts (Eigenvectors, Euclidean distance) to reconstruct images and identify individuals.
+  
+* **[All Aboard - Railway Simulator](https://github.com/ivasduarte/all-aboard.git)**
+  <br>Management simulator with custom graph algorithms, Big-O complexity analysis, and Python statistical data evaluation (Java, JavaFX, Python).
+  
+* **[Logistics On Rails](https://github.com/ivasduarte/logistics-on-rails.git)**  
+  Railway traffic and warehouse logistics management system. Implemented spatial indexes (2D-Trees, Graphs) for network analysis and integrated low-level hardware (C/Assembly) for sensor management.
+
+* **[AlSafe - Air Traffic Control Simulator](https://github.com/ivasduarte/ai-safe.git)**  
+  High-concurrency flight simulator. Built a custom DSL compiler with ANTLR and a concurrent C engine using processes, shared memory, and pipes for real-time collision detection. Structured with DDD.

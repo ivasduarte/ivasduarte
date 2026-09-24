@@ -66,6 +66,9 @@
 * **[Logistics On Rails](https://github.com/ivasduarte/logistics-on-rails.git)**  
   Railway traffic and warehouse logistics management system. Implemented spatial indexes (2D-Trees, Graphs) for network analysis and integrated low-level hardware (C/Assembly) for sensor management.
 
+* **[Airport Campus Network - Terminal 5 Implementation](https://github.com/ivasduarte/airport-campus-network.git)**  
+  End-to-end design and configuration of an airport terminal network (Cisco Packet Tracer). VLSM subnetting (8000+ nodes), OSPF dynamic routing, and structural cabling design. Deployed enterprise services (DNS, DHCP, Cisco VoIP) and secured the infrastructure using Static NAT and Extended ACLs.
+
 * **[AlSafe - Air Traffic Control Simulator](https://github.com/ivasduarte/ai-safe.git)**  
   High-concurrency flight simulator. Built a custom DSL compiler with ANTLR and a concurrent C engine using processes, shared memory, and pipes for real-time collision detection. Structured with DDD.
 

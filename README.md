@@ -68,3 +68,14 @@
 
 * **[AlSafe - Air Traffic Control Simulator](https://github.com/ivasduarte/ai-safe.git)**  
   High-concurrency flight simulator. Built a custom DSL compiler with ANTLR and a concurrent C engine using processes, shared memory, and pipes for real-time collision detection. Structured with DDD.
+
+---
+
+<!-- Certifications -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=transparent&height=60&section=header&text=%20Complementary%20Certifications&fontSize=25&fontColor=bcdae5&fontAlignY=60&animation=fadeIn"/>
+</p>
+
+* **Cybersecurity:** [Cidadão Cibersocial](https://lms.nau.edu.pt/certificates/69097341a8314cc7b419a297d58f66fe) & [Cidadão Ciberseguro](https://lms.nau.edu.pt/certificates/2ef717c8728f47aab69450da3616c585) (Centro Nacional de Cibersegurança).
+* **Tech & Management:** [Introduction to Artificial Intelligence](https://lms.nau.edu.pt/certificates/9775fbebb70e4e7a967ee3f7f723f127) & [Digital Project Management](https://lms.nau.edu.pt/certificates/5af547b8c40443d5b1b7b4144364960a) (Academia Portugal Digital).
+

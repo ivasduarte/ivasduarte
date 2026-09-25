@@ -81,4 +81,5 @@
 
 * **Cybersecurity:** [Cidadão Cibersocial](https://lms.nau.edu.pt/certificates/69097341a8314cc7b419a297d58f66fe) & [Cidadão Ciberseguro](https://lms.nau.edu.pt/certificates/2ef717c8728f47aab69450da3616c585) (Centro Nacional de Cibersegurança).
 * **Tech & Management:** [Introduction to Artificial Intelligence](https://lms.nau.edu.pt/certificates/9775fbebb70e4e7a967ee3f7f723f127) & [Digital Project Management](https://lms.nau.edu.pt/certificates/5af547b8c40443d5b1b7b4144364960a) (Academia Portugal Digital).
+*  **Languages:** EF SET English Certificate - C2 Proficient (EF Standard English Test).
 

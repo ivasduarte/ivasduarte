@@ -58,7 +58,7 @@ class DataRepository:
 class FontManager:
     def create_subset(self, font_path: str) -> str:
         # Alfabeto e números cobrem os dados dinâmicos do JSON
-        chars = "0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz:,.@|"
+        chars = "0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz:,.@|ã()&/"
         with open('chars.txt', 'w', encoding='utf-8') as f:
             f.write(chars)
             
@@ -112,7 +112,7 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
         <text x="40" y="60" class="title" font-size="28">Iva Duarte Silva</text>
         <text x="40" y="90" class="sub" font-size="16">Software Engineering Student @ ISEP | DDD, TDD &amp; Cybersecurity</text>
         """
-        with open('cards/hero.svg', 'w') as f:
+        with open('cards/hero.svg', 'w', encoding='utf-8') as f:
             f.write(self._base_svg(800, 140, delay, content))
 
     def build_tile(self, name: str, title: str, subtitle: str, delay: float):
@@ -120,7 +120,7 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
         <text x="20" y="45" class="title">{title}</text>
         <text x="20" y="70" class="sub">{subtitle}</text>
         """
-        with open(f'cards/tile_{name}.svg', 'w') as f:
+        with open(f'cards/tile_{name}.svg', 'w', encoding='utf-8') as f:
             f.write(self._base_svg(260, 100, delay, content))
 
     def build_stats(self, stats: Stats, delay: float):
@@ -130,7 +130,7 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
         <text x="300" y="90" class="sub">Active Days: <tspan fill="{self.theme.brand}">{stats.active_days}</tspan></text>
         <text x="560" y="90" class="sub">Busiest Day: <tspan fill="{self.theme.brand}">{stats.busiest_day}</tspan></text>
         """
-        with open('cards/stats.svg', 'w') as f:
+        with open('cards/stats.svg', 'w', encoding='utf-8') as f:
             f.write(self._base_svg(800, 140, delay, content))
 
     def build_repo(self, name: str, title: str, desc: str, delay: float):
@@ -142,7 +142,7 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
         {smil}
         <text x="20" y="75" class="sub">{desc}</text>
         """
-        with open(f'cards/repo_{name}.svg', 'w') as f:
+        with open(f'cards/repo_{name}.svg', 'w', encoding='utf-8') as f:
             f.write(self._base_svg(390, 120, delay, content))
 
     def build_graph(self, stats: Stats, delay: float):
@@ -160,8 +160,44 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
         <text x="40" y="25" class="title" font-size="16">Contribution Graph</text>
         {''.join(boxes)}
         """
-        with open('cards/graph.svg', 'w') as f:
+        with open('cards/graph.svg', 'w', encoding='utf-8') as f:
             f.write(self._base_svg(800, 165, delay, content))
+            
+            
+    def build_skills(self, delay: float):
+        content = f"""
+        <text x="40" y="45" class="title">Tech Stack &amp; Systems Architecture</text>
+        
+        <text x="40" y="80" class="sub" font-weight="bold">Languages:</text>
+        <text x="135" y="80" class="sub">Java, C, Assembly (RISC-V), SQL, PL/SQL</text>
+        
+        <text x="40" y="105" class="sub" font-weight="bold">Architecture:</text>
+        <text x="145" y="105" class="sub">Domain-Driven Design (DDD), TDD, CI/CD, Agile/Scrum</text>
+        
+        <text x="40" y="130" class="sub" font-weight="bold">Systems:</text>
+        <text x="115" y="130" class="sub">Linux IPC (Pipes, SHM, Semaphores), TCP/UDP Sockets</text>
+        
+        <text x="40" y="155" class="sub" font-weight="bold">Tools &amp; DB:</text>
+        <text x="135" y="155" class="sub">Oracle, Git, Maven, ANTLR, JUnit, PlantUML</text>
+        """
+        with open('cards/skills.svg', 'w', encoding='utf-8') as f:
+            f.write(self._base_svg(800, 185, delay, content))
+            
+    def build_certifications(self, delay: float):
+        content = f"""
+        <text x="40" y="45" class="title">Complementary Certifications</text>
+        
+        <text x="40" y="80" class="sub" font-weight="bold">Cybersecurity:</text>
+        <text x="145" y="80" class="sub">Cidadão Cibersocial &amp; Cidadão Ciberseguro (CNCS)</text>
+        
+        <text x="40" y="105" class="sub" font-weight="bold">Tech &amp; Mgmt:</text>
+        <text x="145" y="105" class="sub">Intro to AI &amp; Digital Project Management (APD)</text>
+        
+        <text x="40" y="130" class="sub" font-weight="bold">Languages:</text>
+        <text x="125" y="130" class="sub">EF SET English Certificate - C2 Proficient</text>
+        """
+        with open('cards/certs.svg', 'w', encoding='utf-8') as f:
+            f.write(self._base_svg(800, 160, delay, content))
 
 def main():
     is_static = os.environ.get('STATIC', '0') == '1'
@@ -182,15 +218,24 @@ def main():
     
     svc = SvgService(theme, b64_font, is_static)
     
-    # Animação em cascata via atrasos progressivos
     svc.build_hero(delay=0.0)
     svc.build_tile('linkedin', 'LinkedIn', 'Professional Profile', delay=0.2)
     svc.build_tile('email', 'Email', 'Get in touch', delay=0.4)
     svc.build_tile('portfolio', 'Portfolio', 'Web Projects', delay=0.6)
-    svc.build_stats(stats, delay=0.8)
-    svc.build_repo('eigen', 'Eigenfaces', 'Linear Algebra & Image Compression', delay=1.0)
-    svc.build_repo('aboard', 'All Aboard', 'JavaFX Railway Simulator', delay=1.2)
-    svc.build_graph(stats, delay=1.4)
+    
+    svc.build_skills(delay=0.8)
+    svc.build_stats(stats, delay=1.0)
+    
+    svc.build_repo('aboard', 'All Aboard', 'JavaFX Railway Simulator', delay=1.3)
+    svc.build_repo('logistics', 'Logistics On Rails', 'Spatial Indexes &amp; C/Assembly', delay=1.4)
+    svc.build_repo('airport', 'Airport Campus', 'Cisco VLSM, OSPF &amp; Security', delay=1.5)
+    svc.build_repo('aisafe', 'AISafe', 'Concurrent C Engine, IPC &amp; DDD', delay=1.6)
+    svc.build_repo('portfoliocard', 'My Portfolio', 'Personal Website &amp; Projects', delay=1.7)
+    svc.build_repo('adr', 'ADR API', 'Node.js API/CLI for Markdown &amp; PlantUML', delay=1.8)
+    svc.build_repo('mredis', 'Mini Redis TCP', 'Node.js TCP Key-Value Store &amp; Dummy Testing', delay=1.9)
+    
+    svc.build_certifications(delay=1.8)
+    svc.build_graph(stats, delay=2.0)
 
 if __name__ == '__main__':
     main()

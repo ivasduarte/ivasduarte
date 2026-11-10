@@ -56,25 +56,27 @@ class DataRepository:
         return Stats(active, max(max_streak, curr_streak), busiest, weeks)
 
 class FontManager:
-    def create_subset(self, font_path: str) -> str:
-        # Alfabeto e números cobrem os dados dinâmicos do JSON
-        chars = "0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz:,.@|ã()&/"
-        with open('chars.txt', 'w', encoding='utf-8') as f:
-            f.write(chars)
-            
-        subprocess.run([
-            sys.executable, '-m', 'fontTools.subset', font_path, 
-            '--text-file=chars.txt', 
-            '--flavor=woff', 
-            '--output-file=subset.woff'
-        ], check=True)
+    def fetch_base64_woff2(self) -> str:
+        import urllib.request, re, base64
         
-        with open('subset.woff', 'rb') as f:
-            b64 = base64.b64encode(f.read()).decode('utf-8')
+        # Forçamos um User-Agent de um Firefox recente para garantir WOFF2
+        req = urllib.request.Request(
+            "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap",
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115.0) Gecko/20100101 Firefox/115.0'}
+        )
+        css = urllib.request.urlopen(req).read().decode('utf-8')
+        
+        # Regex tolerante: aceita aspas simples, duplas ou sem aspas, e ignora a extensão
+        match = re.search(r"/\*\s*latin\s*\*/.*?url\(['\"]?(https://[^'\")]+)['\"]?\)", css, re.DOTALL)
+        
+        # Fallback: Se não encontrar o bloco "latin", apanha a primeira fonte disponível
+        if not match:
+            match = re.search(r"url\(['\"]?(https://[^'\")]+)['\"]?\)", css)
             
-        os.remove('chars.txt')
-        os.remove('subset.woff')
-        return b64
+        url = match.group(1)
+        
+        font_data = urllib.request.urlopen(url).read()
+        return base64.b64encode(font_data).decode('utf-8')
 
 # --- APPLICATION ---
 class SvgService:
@@ -90,7 +92,7 @@ class SvgService:
         
         return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}">
 <style>
-@font-face {{ font-family: 'Inter'; src: url(data:font/woff;charset=utf-8;base64,{self.font}) format('woff'); }}
+@font-face {{ font-family: 'Inter'; src: url(data:font/woff2;charset=utf-8;base64,{self.font}) format('woff2'); }}
 @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(15px); }} to {{ opacity: 1; transform: translateY(0); }} }}
 .card {{ opacity: {opacity}; {anim} }}
 text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
@@ -201,18 +203,12 @@ text {{ font-family: 'Inter', sans-serif; fill: {self.theme.text}; }}
 
 def main():
     is_static = os.environ.get('STATIC', '0') == '1'
-    
-    if not os.path.exists("font.ttf") or os.path.getsize("font.ttf") < 10000:
-        # Immutable commit hash ensuring the file is a static, full-character TTF
-        font_url = "https://raw.githubusercontent.com/google/fonts/a4d339399cbdb1ca4be52968edb9338f323e0618/ofl/inter/static/Inter-Regular.ttf"
-        urllib.request.urlretrieve(font_url, "font.ttf")
-        
     theme = Theme()
     repo = DataRepository()
     stats = repo.fetch_stats('github-data.json')
     
     fm = FontManager()
-    b64_font = fm.create_subset("font.ttf")
+    b64_font = fm.fetch_base64_woff2()
     
     svc = SvgService(theme, b64_font, is_static)
     

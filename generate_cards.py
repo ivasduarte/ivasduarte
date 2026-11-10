@@ -203,10 +203,8 @@ def main():
     is_static = os.environ.get('STATIC', '0') == '1'
     
     if not os.path.exists("font.ttf") or os.path.getsize("font.ttf") < 10000:
-        css = urllib.request.urlopen("https://fonts.googleapis.com/css?family=Inter").read().decode('utf-8')
-        
-        font_url = re.search(r'url\((https://[^)]+)\)', css).group(1)
-        
+        # Immutable commit hash ensuring the file is a static, full-character TTF
+        font_url = "https://raw.githubusercontent.com/google/fonts/a4d339399cbdb1ca4be52968edb9338f323e0618/ofl/inter/static/Inter-Regular.ttf"
         urllib.request.urlretrieve(font_url, "font.ttf")
         
     theme = Theme()

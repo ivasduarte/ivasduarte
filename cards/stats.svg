@@ -16,7 +16,7 @@ text { font-family: 'Inter', sans-serif; fill: #bcdae5; }
     
         <text x="40" y="50" class="title">GitHub Stats &amp; Streaks</text>
         <text x="40" y="90" class="sub">Current Streak: <tspan fill="#9ba5f0">7 days</tspan></text>
-        <text x="300" y="90" class="sub">Active Days: <tspan fill="#9ba5f0">89</tspan></text>
+        <text x="300" y="90" class="sub">Active Days: <tspan fill="#9ba5f0">90</tspan></text>
         <text x="560" y="90" class="sub">Busiest Day: <tspan fill="#9ba5f0">2026-11-03</tspan></text>
         
 </g>
